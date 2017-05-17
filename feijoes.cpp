@@ -16,6 +16,8 @@ ll quant_dig(ll p, int k){
 			if(!vet[x%10]){
 				vet[x%10] = 1;
 				occ++;
+				if(occ > k)
+					break;
 			}
 			x /= 10;
 		}
