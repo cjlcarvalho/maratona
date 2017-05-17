@@ -6,25 +6,19 @@ typedef unsigned long long int ll;
 using namespace std;
 
 ll quant_dig(ll p, int k){
-	int occ;
-	ll x;
-	while(true){
-		occ = 0;
-		int vet[10] = {};
-		x = p;
-		while(x){
-			if(!vet[x%10]){
-				vet[x%10] = 1;
-				occ++;
-				if(occ > k)
-					break;
-			}
-			x /= 10;
+	int occ = 0;
+	ll x = p;
+	int vet[10] = {};
+	while(x){
+		if(!vet[x%10]){
+			vet[x%10] = 1;
+			occ++;
+			if(occ > k)
+				break;
 		}
-		if(occ == k) break;
-		else p++;
+		x /= 10;
 	}
-	return p;
+	return (occ == k) ? p : quant_dig(p + 1, k);
 }
 
 int main(){
