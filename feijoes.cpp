@@ -26,21 +26,18 @@ ll quant_dig(ll p, int k){
 }
 
 int main(){
-	ll p, i;
-	int n, k;
-	vector<ll> resp;
+	ll p;
+	int n, k, i = 0;
 	cin >> n;
-	while(n){
+	ll resp[n];
+	while(i < n){
 		cin >> p >> k;
 		if(p < 1 || p > 1000000000000000000 || k < 1 || k > 10)
 			return 0;
-		resp.push_back(quant_dig(p, k));
-		n--;
+		resp[i] = quant_dig(p, k);
+		i++;
 	}
-	int c = 1;
-	for(auto it = resp.begin(); it != resp.end(); ++it){
-		cout << "Caso " << c << ": " << *it << endl;
-		c++;
-	}
+	for(int a = 0; a < n; a++)
+		cout << "Caso " << a + 1 << ": " << resp[a] << endl;
 	return 0;
 }
