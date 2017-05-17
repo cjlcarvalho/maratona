@@ -1,25 +1,28 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <math.h>
 
 typedef unsigned long long int ll;
 
 using namespace std;
 
-bool quant_dig(ll p, int k){
-	vector<int> v;
-	ll a = p;
-	while(p > 0){
-		v.push_back(p%10);
-		p /= 10;
+ll quant_dig(ll p, int k){
+	int occ;
+	ll x;
+	while(true){
+		occ = 0;
+		int vet[10] = {};
+		x = p;
+		while(x){
+			if(!vet[x%10]){
+				vet[x%10] = 1;
+				occ++;
+			}
+			x /= 10;
+		}
+		if(occ == k) break;
+		else p++;
 	}
-	sort(v.begin(), v.end());
-	v.erase(unique(v.begin(), v.end()), v.end());
-	if(v.size()== k)
-		return true;
-	else
-		return false;
+	return p;
 }
 
 int main(){
@@ -31,17 +34,7 @@ int main(){
 		cin >> p >> k;
 		if(p < 1 || p > 1000000000000000000 || k < 1 || k > 10)
 			return 0;
-		if(quant_dig(p, k))
-			resp.push_back(p);
-		else{
-			i = p + 1;
-			while(i < (p + pow(10, k))){
-				if(quant_dig(i, k))
-					break;
-				i++;
-			}
-			resp.push_back(i);
-		}
+		resp.push_back(quant_dig(p, k));
 		n--;
 	}
 	int c = 1;
