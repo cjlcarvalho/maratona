@@ -10,11 +10,8 @@ int main(){
         cin >> x >> y;
         if(y == 0)
             printf("divisao impossivel\n");
-        else if(x == 0)
-            printf("%.1f\n", 0);
         else
-            printf("%.1f\n", (double)x / (double)y);
+            printf("%.1f\n", ((double)x/(double)y));
     }
-    printf("\n");
     return 0;
 }
