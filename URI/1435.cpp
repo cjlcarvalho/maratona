@@ -19,12 +19,8 @@ void imprimir(int n){
     int matriz[t][t];
     for(int i = 0; i<t; i++){
         for(int j = 0, l = 1; j<t; j++){
-            if(j + 1 < i + 1){
-                matriz[i][j] = l;
-                l++;
-            }
-            else
-                matriz[i][j] = l;
+            matriz[i][j] = l;
+            if(j < i) l++;
         }
     }
     if(n % 2 == 0){
