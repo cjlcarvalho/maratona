@@ -4,13 +4,12 @@ using namespace std;
 
 void printFormatted(int n){
     int cont = 0, t = n;
-    while(t > 0){
+    while(t){
         cont++;
         t /= 10;
     }
     cont = 3 - cont;
-    while(cont--)
-        cout << " ";
+    while(cont--) cout << " ";
     cout << n;
 }
 
@@ -31,8 +30,7 @@ void imprimir(int n){
             }
             for(int j = t - 1; j >= 0; j--){
                 printFormatted(matriz[i][j]);
-                if(j)
-                    cout << " ";
+                if(j) cout << " ";
             }
             cout << endl;
         }
@@ -43,8 +41,7 @@ void imprimir(int n){
             }
             for(int j = t - 1; j >= 0; j--){
                 printFormatted(matriz[i][j]);
-                if(j)
-                    cout << " ";
+                if(j) cout << " ";
             }
             cout << endl; 
         }
@@ -53,13 +50,11 @@ void imprimir(int n){
         for(int i = 0; i<t; i++){
             for(int j = 0; j<t; j++){
                 printFormatted(matriz[i][j]);
-                if(n != 1)
-                    cout << " ";
+                if(n != 1) cout << " ";
             }
             for(int j = t - 2; j >= 0; j--){
                 printFormatted(matriz[i][j]);
-                if(j)
-                    cout << " ";
+                if(j) cout << " ";
             }
             cout << endl;
         }
@@ -70,8 +65,7 @@ void imprimir(int n){
             }
             for(int j = t - 2; j >= 0; j--){
                 printFormatted(matriz[i][j]);
-                if(j)
-                    cout << " ";
+                if(j) cout << " ";
             }
             cout << endl;
         }
