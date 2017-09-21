@@ -22,53 +22,27 @@ void imprimir(int n){
             if(j < i) l++;
         }
     }
-    if(n % 2 == 0){
-        for(int i = 0; i<t; i++){
-            for(int j = 0; j<t; j++){
-                printFormatted(matriz[i][j]);
-                cout << " ";
-            }
-            for(int j = t - 1; j >= 0; j--){
-                printFormatted(matriz[i][j]);
-                if(j) cout << " ";
-            }
-            cout << endl;
+    for(int i = 0; i<t; i++){
+        for(int j = 0; j<t; j++){
+            printFormatted(matriz[i][j]);
+            cout << " ";
         }
-        for(int i = t - 1; i >= 0; i--){
-            for(int j = 0; j<t; j++){
-                printFormatted(matriz[i][j]);
-                cout << " ";
-            }
-            for(int j = t - 1; j >= 0; j--){
-                printFormatted(matriz[i][j]);
-                if(j) cout << " ";
-            }
-            cout << endl; 
+        for(int j = t - ((n % 2) ? 2 : 1); j >= 0; j--){
+            printFormatted(matriz[i][j]);
+            if(j) cout << " ";
         }
+        cout << endl;
     }
-    else {
-        for(int i = 0; i<t; i++){
-            for(int j = 0; j<t; j++){
-                printFormatted(matriz[i][j]);
-                if(n != 1) cout << " ";
-            }
-            for(int j = t - 2; j >= 0; j--){
-                printFormatted(matriz[i][j]);
-                if(j) cout << " ";
-            }
-            cout << endl;
+    for(int i = t - ((n % 2) ? 2 : 1); i >= 0; i--){
+        for(int j = 0; j<t; j++){
+            printFormatted(matriz[i][j]);
+            cout << " ";
         }
-        for(int i = t - 2; i >= 0; i--){
-            for(int j = 0; j<t; j++){
-                printFormatted(matriz[i][j]);
-                cout << " ";
-            }
-            for(int j = t - 2; j >= 0; j--){
-                printFormatted(matriz[i][j]);
-                if(j) cout << " ";
-            }
-            cout << endl;
+        for(int j = t - ((n % 2) ? 2 : 1); j >= 0; j--){
+            printFormatted(matriz[i][j]);
+            if(j) cout << " ";
         }
+        cout << endl; 
     }
     cout << endl;
 }
@@ -81,4 +55,3 @@ int main(){
     }
     return 0;
 }
-
