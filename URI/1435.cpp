@@ -25,7 +25,7 @@ void imprimir(int n){
     for(int i = 0; i<t; i++){
         for(int j = 0; j<t; j++){
             printFormatted(matriz[i][j]);
-            cout << " ";
+            if(n != 1) cout << " ";
         }
         for(int j = t - ((n % 2) ? 2 : 1); j >= 0; j--){
             printFormatted(matriz[i][j]);
