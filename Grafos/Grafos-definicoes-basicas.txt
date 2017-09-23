@@ -1,0 +1,72 @@
+Grafos
+
+- Todo grafo G é composto por um conjunto de vértices V e arestas E. Logo, pode ser representado por G(V,E).
+
+- Cada vértice representa um ponto (ou nodo) e cada aresta representa uma conexão entre dois vértices.
+
+- Um grafo dirigido é basicamente um dígrafo (dupla de vértices conectados por uma aresta) composto pelos vértices A e B, onde a aresta de A o leva para B e vice-versa.
+
+- Um grafo pode possuir pesos. Esses pesos podem estar em seus vértices ou em suas arestas.
+
+- Um grafo cíclico é aquele que possui uma aresta direcionando um vértice A para B assim como possui outra aresta direcionando B para A. Um acíclico é aquele em que A direciona para B, sem que ocorra o contrário.
+
+- Um conjunto conexo representa um grupo de vértices espalhados. Por exemplo, considerando um grafo com 4 vértices e as seguintes arestas:
+	
+0 1
+0 2
+1 2
+
+- Podemos dizer que existem apenas dois conjuntos conexos: 0-1-2 e 3. (Perceba que o vértice 3 não foi lido, logo ele é membro de um conjunto conexo apenas com ele).
+
+- Exemplo de entrada de um grafo dirigido com pesos nas arestas:
+
+0 1 10
+0 2 15
+1 3 8
+3 4 20
+
+- Uma forma interessante de representar um grafo como o de cima é criar uma matriz de adjacências. Cada linha representará uma origem e cada coluna das linhas representará um destino. Por exemplo, dada a matriz MAT com as informações dadas no exemplo acima, podemos dizer que MAT[1][3] guarda o valor 8, que é juntamente o peso dessa posição.
+
+int N = 5;
+
+int edges[N][N];
+
+edges[0][1] = 10; // aresta 0-1 tem peso 10
+edges[1][3] = 8;   // aresta 1-3 tem peso 8
+edges[0][2] = 15; // aresta 0-2 tem peso 15
+edges[3][4] = 20; // aresta 3-4 tem peso 20
+
+- Já a forma de representar um grafo com peso nos vértices pode ser feita da seguinte forma: crie um vetor de pesos de tamanho N, sendo N a quantidade de vértices, e crie uma matriz booleana de adjacências de dimensão NxN, onde cada posição irá informar se existe uma adjacência entre aquela origem e destino.
+
+Exemplo:
+
+int N = 4; // quantidade de vértices
+
+int weights[N]; // pesos dos vértices
+
+bool edges[N][N]; // matriz que informa as arestas
+
+edges[0][3] = true;
+edges[3][0] = true; // existe uma aresta de 0-3 e de 3-0
+
+- Exercício: Dada um grafo G, com um conjunto de vértices V e arestas E, informe os pesos de todos os vértices que são adjacentes a um vértice dado (ou seja, pertencem a uma aresta cuja origem seja o vértice dado).
+
+Entrada: A primeira linha contem um inteiro N, representando a quantidade de vértices. As N linhas posteriores irão conter 2 inteiros cada (A e B), onde o primeiro representa o vértice e o segundo o seu peso. Após isso, leia um inteiro M, representando a quantidade de arestas. As M linhas posteriores irão conter 2 inteiros cada, onde o primeiro é a origem e o segundo é o destino de cada aresta. Por fim, leia um inteiro T, que representa a quantidade de casos de testes, onde cada caso irá conter um inteiro que representa o vértice a ser procurado.
+ 
+4
+0 10
+1 12
+2 13
+3 15
+3
+0 1
+0 2
+2 3
+2
+0
+1
+
+Saída: Para cada caso de teste apresente uma linha com os pesos das adjacências.
+ 
+12 13
+10 
