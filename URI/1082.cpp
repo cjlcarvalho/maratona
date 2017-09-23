@@ -2,37 +2,57 @@
 
 using namespace std;
 
-struct No {
+struct Vertex {
     char val;
-    vector<No*> adj;
+    vector<Vertex*> adj;
     
-    bool isAdj(char c){
-        for(No* child : adj)
-            if(child->val == c)
+    Vertex(char val){
+        this->val = val;
+    };
+    
+    void addAdj(char val){
+        this->adj.push_back(new Vertex(val));
+    };
+    
+    bool isAdj(char val){
+        for(Vertex* child : this->adj)
+            if(child->val == val)
                 return true;
+        return false;
+    };
+    
+    bool isContained(vector<Vertex*> v, char father){
+        for(Vertex* f : v){
+            if(f->val == father && f->isAdj(this->val))
+                return true;
+        }
         return false;
     };
 };
 
-bool contains(vector<No*> nos, char c){
-    for(No* n : nos)
-        if(n->val == c) 
-            return true;
-    return false;
-}
-
-void addNo(vector<No*>& nos, char val){
-    for(No* n : nos){
-        if(n->val == val)
+void add(vector<Vertex*> vtx, char first, char second){
+    for(Vertex* v : vtx){
+        if(v->val == first && !v->isAdj(second) && !v->isContained(vtx, second)){
+            v->addAdj(second);
             return;
+        }
+        else if(v->val != first && v->isAdj(second) && !v->isAdj(first)){
+            v->addAdj(first);
+            return;
+        }
+        else if(v->val != second && v->isAdj(first) && !v->isAdj(second)){
+            v->addAdj(second);
+            return;
+        }
+        else if(v->val == second && !v->isAdj(first) && !v->isContained(vtx, first)){
+            v->addAdj(first);
+            return;
+        }
     }
-    No* novo = new No;
-    novo->val = val;
-    nos.push_back(novo);
 }
 
-void addAdj(vector<No*>& nos, char father, char child){
-    
+bool compare(char a, char b){
+    return a < b;
 }
 
 int main(){
@@ -41,21 +61,28 @@ int main(){
     cin >> n;
     for(int i = 1; i<=n; i++){
         cin >> v >> e;
-        vector<No*> nos;
+        vector<Vertex*> vtx;
         for(char c = 'a', i = 0; i<v; i++, c++)
-            addNo(nos, c);
-        for(int i = 0; i<e; i++){
+            vtx.push_back(new Vertex(c));
+        while(e--){
             cin >> a >> b;
-            addAdj(nos, a, b);            
+            add(vtx, a, b);
         }
         cout << "Case #" << i << ":" << endl;
         int cont = 0;
-        for(No* n : nos){
-            if(!isAdj(nos, n->val)){
+        for(Vertex* vt : vtx){
+            bool adj = false;
+            for(Vertex* vt2 : vtx)
+                if(vt2->isAdj(vt->val)) adj = true;
+            if(!adj){
                 cont++;
-                cout << n->val << ",";
-                for(No* c : n->adj)
-                    cout << c->val << ",";
+                string result;
+                result.push_back(vt->val);
+                for(Vertex* c : vt->adj) 
+                    result.push_back(c->val);
+                sort(result.begin(), result.end(), compare);
+                for(char c : result)
+                    cout << c << ",";
                 cout << endl;
             }
         }
