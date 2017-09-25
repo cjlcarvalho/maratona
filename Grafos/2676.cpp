@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define INF 1000000
+#define INF 10000000
 
 using namespace std;
 
