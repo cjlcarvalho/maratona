@@ -1,55 +1,27 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-void ord_par(int* arr, int s){
-    for(int i = s - 1; i>=0; i--){
-        for(int j = 0; j<i; j++){
-            if(arr[j] > arr[j+1]){
-                int troca = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = troca;
-            }
-        }
-    }
+bool compare(int a, int b){
+    return a > b;
 }
-
-void ord_imp(int* arr, int s){
-    for(int i = s - 1; i>= 0; i--){
-        for(int j = 0; j<i; j++){
-            if(arr[j] < arr[j+1]){
-                int troca = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = troca;
-            }
-        }
-    }
-}
-
 
 int main(){
     int n, x;
-    int cp, ci;
-    cp = ci = 0;
+    vector<int> p, i;
     cin >> n;
-    int par[n] = {};
-    int impar[n] = {};
     while(n--){
        cin >> x;
-       if(x % 2 == 0){
-           par[cp] = x;
-           cp++;
-       }
-       else{
-           impar[ci] = x;
-           ci++;
-       }
+       if(x % 2 == 0)
+           p.push_back(x);
+       else
+           i.push_back(x);
     }
-    ord_par(par, cp);
-    ord_imp(impar, ci);
-    for(int i = 0; par[i]; i++)
-        cout << par[i] << endl;
-    for(int i = 0; impar[i]; i++)
-        cout << impar[i] << endl;
+    sort(p.begin(), p.end());
+    sort(i.begin(), i.end(), compare);
+    for(int c : p)
+        cout << c << endl;
+    for(int c : i)
+        cout << c << endl;
     return 0;
 }
