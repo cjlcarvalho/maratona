@@ -11,15 +11,14 @@ int main(){
     for(int i = 0; i<4; i++){
         for(int j = i + 1; j<4; j++){
             for(int k = j + 1; k<4; k++){
-                if(!(pontas[i] > (pontas[j] + pontas[k]) || pontas[j] > (pontas[i] + pontas[k]) || pontas[k] > (pontas[i] + pontas[j])))
+                if(!(pontas[i] >= (pontas[j] + pontas[k]) || pontas[j] >= (pontas[i] + pontas[k]) || pontas[k] >= (pontas[i] + pontas[j])))
                     achou = true;
             }
         }
     }
     if(achou)
-        cout << "S";
+        cout << "S\n";
     else
-        cout << "N";
-    cout << endl;
+        cout << "N\n";
     return 0;
 }
