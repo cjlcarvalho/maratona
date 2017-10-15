@@ -2,15 +2,6 @@
 
 using namespace std;
 
-int qtDigits(int n){
-    int result = 0;
-    while(n){
-        result++;
-        n /= 10;
-    }
-    return result;
-}
-
 void solve(int n){
     int mat[n][n];
     for(int i = 0; i<n; i++){
@@ -29,13 +20,9 @@ void solve(int n){
    }
    for(int i = 0; i<n; i++){
         for(int j = 0; j<n; j++){
-            int k = 3 - qtDigits(mat[i][j]);
-            while(k--) cout << " ";
-            cout << mat[i][j];
-            if(j == n - 1)
-                cout << endl;
-            else
-                cout << " ";
+            printf("%3d", mat[i][j]);
+            if(j == n - 1) cout << endl;
+            else cout << " ";
         } 
    }
    cout << endl;
@@ -43,7 +30,7 @@ void solve(int n){
 
 int main(){
     int n;
-    while(cin >> n, n != 0)
+    while(cin >> n, n)
         solve(n);
     return 0;
 }
