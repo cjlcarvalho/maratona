@@ -2,29 +2,29 @@
 
 using namespace std;
 
-int only_ones(int64_t n){
-    int cont = 0;
-    while(n > 0){
-        if(n % 10 == 1)
-            cont++;
-        else
-            return 0;
+int onlyOnes(long n){
+    int result = 0;
+    while(n){
+        if(n % 10 != 1) return 0;
+        result++;
         n /= 10;
     }
-    return cont;
+    return result;
+}
+
+long ones(long n){
+    int x;
+    for(int i = 1; ; i++){
+        x = onlyOnes(n * i);
+        if(x) return x;
+    }
+    return 0;
 }
 
 int main(){
-    int n;
+    long n;
     while(cin >> n){
-        for(int i = 1; ; i++){
-            int64_t r = n * i;
-            int cont = only_ones(r);
-            if(cont){
-                cout << cont << endl;
-                break;
-            }
-        }
+        cout << ones(n) << endl;
     }
     return 0;
 }
