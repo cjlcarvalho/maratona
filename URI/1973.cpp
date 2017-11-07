@@ -7,6 +7,7 @@ int main(){
     cin >> n;
     int64_t estrelas[n];
     bool checked[n];
+    memset(checked, false, sizeof(checked));
     for(int i = 0; i<n; i++)
         cin >> estrelas[i];
     int i = 0;
@@ -25,7 +26,7 @@ int main(){
     }
     
     int cont = 0;
-    for(int i = 0; i<n; i++) 
+    for(int i = 0; i<n; i++)
         if(checked[i] == true) 
             cont++;
         
