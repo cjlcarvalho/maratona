@@ -5,11 +5,10 @@ using namespace std;
 int main(){
     int a, b, c;
     cin >> a >> b >> c;
-    if(a >= b && a >= c)
-        cout << b * 2 + c * 4 << endl; 
-    else if(b >= a && b >= c)
-        cout << a * 2 + c * 2 << endl;
-    else
-        cout << a * 4 + b * 2 << endl;
+    int primeiro, segundo, terceiro;
+    primeiro = b * 2 + c * 4;
+    segundo = a * 2 + c * 2;
+    terceiro = a * 4 + b * 2;
+    cout << min(min(primeiro, segundo), terceiro) << endl;
     return 0;
 }
