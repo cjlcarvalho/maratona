@@ -12,9 +12,9 @@ int main(){
         int metade = (int(s.size()) / 2) - 1;
         for(int i = metade; i>=0; i--)
             cout << s[i];
-        for(int i = int(s.size()); i>metade; i--)
+        for(int i = int(s.size()) - 1; i>metade; i--)
             cout << s[i];
-        cout << '\0' << endl;
+        cout << endl;
     }
     return 0;
 }

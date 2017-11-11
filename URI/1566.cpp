@@ -1,31 +1,33 @@
 #include <bits/stdc++.h>
-#define INF 30000000
 
 using namespace std;
 
 int altura[231];
 
+void limpar(){
+    memset(altura, 0, sizeof(altura));
+}
+
 int main(){
-    int n, m, c, max;
-    cin >> n;
+    int n, m, a, max;
+    scanf(" %d", &n);
     while(n--){
-        cin >> m;
-        memset(altura, 0, sizeof(altura));
-        max = 0;
-        for(int i = 0; i<m; i++){
-            cin >> c;
-            altura[c]++;
-            if(c > max) max = c;
+        scanf(" %d", &m);
+        limpar();
+        max = -1;
+        for(int i = 0; i<m; i++) {
+            scanf(" %d", &a);
+            if(max < a)
+                max = a; 
+            altura[a]++;
         }
-        for(int i = 0; i<231; i++){
-            while(altura[i]--){
-                cout << i;
-                if(i != max || altura[i])
-                    cout << " ";
-                else
-                    cout << endl;
+        for(int i = 20; i<=max; i++){
+            for(int j = 0; j < altura[i]; j++){
+                printf("%d", i);
+                if(!(j == altura[i] - 1 && i == max)) printf(" ");
             }
         }
+        printf("\n");
     }
     return 0;
 }
