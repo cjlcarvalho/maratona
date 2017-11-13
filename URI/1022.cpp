@@ -14,7 +14,8 @@ int multiplicador(int x, int y){
 int main(){
     
     int n, n1, n2, d1, d2, x, d;
-    
+    x = 0;
+    d = 0;
     char bar1, bar2, op;
     
     cin >> n;
@@ -33,13 +34,11 @@ int main(){
             d = d1 * d2;
         }
         else if(op == '/'){
-            x = n1 / d1;
-            d = n2 / d2;
+            x = (n1 * d2);
+            d = (n2 * d1);
         }
         int m = multiplicador(x, d);
-        cout << x << "/" << d << " = ";
-        cout << ((m) ? (x / m) : x) << "/";
-        cout << ((m) ? (d / m) : d) << endl;     
+        cout << x << "/" << d << " = " << ((m) ? (x / m) : x) << "/" << ((m) ? (d/m) : d) << endl;     
     }
     return 0;
 }

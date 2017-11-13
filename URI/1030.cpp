@@ -2,34 +2,18 @@
 
 using namespace std;
 
-int solve(bool *vetor, int n, int t){
-    int cont = t, current = n - 1, i, j;
-    while(cont > 1){
-        vetor[current] = true;
-        cont--;
-        for(i = current, j = n; j; ){
-            if(i == t)
-                i = 0;
-            else if(vetor[i])
-                i++;
-            else{
-                i++;
-                j--;
-            }
-        }
-        current = i;
-    }
-    return current;
+int solve(int a, int b){
+    if(a == 1) return 1;
+    else return ((b - 1) + solve(a-1, b)) % a + 1;
 }
 
 int main(){
-    int n, a, b;
+    int n, a, b, t = 1;
     cin >> n;
     while(n--){
         cin >> a >> b;
-        bool vetor[a];
-        memset(vetor, false, sizeof(vetor));
-        cout << solve(vetor, b, a) << endl;
+        cout << "Case " << t << ": " << solve(a, b) << endl;
+        t++;
     }
     return 0;
 }

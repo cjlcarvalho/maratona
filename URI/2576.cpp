@@ -1,35 +1,65 @@
 #include <bits/stdc++.h>
-#define INF 9999999
+
 using namespace std;
 
-int solve(int** grafo, int n, int src, int dest){
-    for(int k = 0; k<n; k++)
-        for(int i = 0; i<n; i++)
-            for(int j = 0; j<n; j++)
-                grafo[i][j] = min(grafo[i][j], grafo[i][k] + grafo[k][j]);
-    return grafo[src][dest];
-}
+struct Graph {
+    int V;
+    vector<int>* E;
+    vector<int>* parent;
+    
+    Graph(int v) : V(v){
+        E = new vector<int>[v];
+        parent = new vector<int>[v];
+    }
+    
+    void add(int a, int b){
+        E[a].push_back(b);
+        parent[b].push_back(a);
+    }
+    
+    int solve(int a, int b){
+        queue<int> q;
+        q.push(a);
+        int current, result = 0;
+        bool visited[V];
+        while(!q.empty()){
+            current = q.front();
+            if(current == b) break;
+            visited[current] = true;
+            int total = 0;
+            for(int e : E[current]){
+                if(!visited[e]){
+                    q.push(e);
+                    total++;
+                }
+            }
+            if(total != int(E[current].size()) || int(E[current].size()) == 0){
+                total = 0;
+                for(int e : parent[current]){
+                    if(!visited[e]){
+                        total++;
+                        q.push(e);
+                        visited[e] = true;
+                    }
+                }
+                if(total > 0)
+                    result++;
+            }
+        }
+        return result;
+    }
+};
 
 int main(){
-    int c, s, a, b, c1, c2;
-    cin >> c >> s >> a >> b;
-    a -= 1;
-    b -= 1;
-    int** grafo = new int*[c];
-    for(int i = 0; i<c; i++) {
-        grafo[i] = new int[c];
-        for(int j = 0; j<c; j++)
-            grafo[i][j] = INF;
+    int a, b, c, d, e, f;
+    cin >> a >> b >> c >> d;
+    Graph grafo(a);
+    for(int i = 0; i<b; i++){
+        cin >> e >> f;
+        grafo.add(e-1, f-1);
     }
-    while(s--){
-        cin >> c1 >> c2;
-        grafo[c1 - 1][c2 - 1] = 0;
-        grafo[c2 - 1][c1 - 1] = 1;
-    }
-    
-    int bibi = solve(grafo, c, a, b);
-    int bibika = solve(grafo, c, b, a);
-    
+    int bibi = grafo.solve(c-1, d-1);
+    int bibika = grafo.solve(d-1, c-1);
     if(bibi < bibika)
         cout << "Bibi: " << bibi << endl;
     else if(bibika < bibi)
