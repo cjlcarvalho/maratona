@@ -2,60 +2,39 @@
 
 using namespace std;
 
-struct Graph {
-    map<char, vector<char>> E;
-    
-    Graph(){
-        for(char i = 'a'; i <= 'z'; i++){
-            vector<char> v;
-            E[i] = v;
-        }
-    }
-    
-    void add(char a, char b){
-        E[a].push_back(b);
-    }
-    
-    bool connected(char a, char b){
-        char current;
-        queue<char> q;
-        q.push(a);
-        while(!q.empty()){
-            current = q.front();
-            q.pop();
-            if(current == b) return true;
-            for(char i : E[current])
-                q.push(i);
-        }
-        return false;
-    }
-
-};
+bool connected(map<char, vector<char> > m, char a, char b){
+    if(a == b) return true;
+    for(char e : m[a])
+        if(connected(m, e, b))
+            return true;
+    return false;
+}
 
 int main(){
     int n, m;
     char a, b;
     string c, d;
-    while(cin >> n >> m){
-        getline(cin, c);
-        Graph grafo;
+    while(scanf(" %d %d", &n, &m) != EOF){
+        map<char, vector<char> > mp;
         for(int i = 0; i<n; i++){
-            cin >> a >> b;
-            grafo.add(a, b);
+            scanf(" %c %c", &a, &b);
+            if(!mp.count(a)){
+                vector<char> v;
+                mp[a] = v;
+            }
+            mp[a].push_back(b);
         }
+        cin.ignore();
         for(int i = 0; i<m; i++){
             cin >> c >> d;
-            if(c.size() != d.size()) cout << "no" << endl;
+            if(c.size() != d.size()) printf("no\n");
             else {
-                bool exist = true;
-                for(int j = 0; j<int(c.size()); j++){
-                    if(!grafo.connected(c[j], d[j])){
-                        exist = false;
-                        break;
-                    }
-                }
-                if(exist) cout << "yes" << endl;
-                else cout << "no" << endl;
+                bool connect = true;
+                for(int j = 0; j<int(c.size()) && connect; j++)
+                    if(c[j] != d[j])
+                        if(!connected(mp, c[j], d[j])) connect = false;
+                if(connect) printf("yes\n");
+                else printf("no\n");
             }
         }
     }
