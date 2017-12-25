@@ -2,102 +2,52 @@
 
 using namespace std;
 
-string asDec(string num, string base){
-    string result;
-    long n = 0, b;
-    if(base == "bin"){
-        b = 1;
-        for(int i = int(num.size() - 1); i >= 0; i--){
-            n += b * (num[i] - 48);
-            b *= 2;
-        }
-    }
-    else if(base == "hex"){
-        b = 0;
-        for(int i = int(num.size() - 1); i >= 0; i--){
-            long x = (num[i] >= '0' && num[i] <= '9') ? num[i] - 48 : num[i] - 87;
-            n += x << b;
-            b += 4;
-        }
-    }
+int bintodec(int n){
+    int base = 0, result = 0;
     while(n){
-       result.insert(result.begin(), (n % 10) + 48);
-       n /= 10;
+        if(n % 10)
+            result += (1 << base);
+        base++;
+        n /= 10;
     }
     return result;
 }
 
-string asHex(string num, string base){
+string dectobin(int n){
     string result;
-    long n = 0, b; 
-    if(base == "dec"){
-        b = 1;
-        for(int i = int(num.size()) - 1; i >= 0; i--){
-            n += (num[i] - 48) * b;
-            b *= 10;
-        }
-    }
-    else if(base == "bin"){
-        b = 1;
-        for(int i = int(num.size() - 1); i >= 0; i--){
-            n += b * (num[i] - 48);
-            b *= 2;
-        }
-    }
     while(n){
-        char x = (n % 16) >= 10 ? (n%16) + 87 : (n%16) + 48;
-        result.insert(result.begin(), x);
-        n /= 16;
-    }
-    return result;
-}
-
-string asBin(string num, string base){
-    string result;
-    long n = 0, b;
-    if(base == "dec"){
-        b = 1;
-        for(int i = int(num.size()) - 1; i >= 0; i--){
-            n += (num[i] - 48) * b;
-            b *= 10;
-        }
-    }
-    else if(base == "hex"){
-        b = 0;
-        for(int i = int(num.size() - 1); i >= 0; i--){
-            long x = (num[i] >= '0' && num[i] <= '9') ? num[i] - 48 : num[i] - 87;
-            n += x << b;
-            b += 4;
-        }
-    }
-    while(n){
-        result.insert(result.begin(), (n % 2) + 48);
+        if(n%2)
+            result.insert(result.begin(), '1');
+        else
+            result.insert(result.begin(), '0');
         n /= 2;
     }
     return result;
 }
 
 int main(){
-    int n, x = 1;
+    int n;
+    char a[250], b[250];
     cin >> n;
-    while(n--){
-        string num, base;
-        cin >> num >> base;
-        cout << "Case " << x << ":" << endl;
-        if(base == "bin"){
-            cout << asDec(num, base) << " dec" << endl;
-            cout << asHex(num, base) << " hex";
+    cin.ignore();
+    for(int i = 1; i<=n; i++){
+        memset(a, 0, 250 * sizeof(char));
+        memset(b, 0, 250 * sizeof(char));
+        scanf(" %s %[^\n]s", a, b);
+        cout << "Case " << i << ":" << endl;
+        if(!strcmp(b, "bin")){
+            cout << strtol(a, NULL, 10) << " dec" << endl;
+            //printf("%x hex\n", num);
         }
-        else if(base == "dec"){
-            cout << asHex(num, base) << " hex" << endl;
-            cout << asBin(num, base) << " bin";
+        else if(!strcmp(b, "dec")){
+            //printf("%x hex\n", a);
+            //cout << dectobin(a) << " bin" << endl;
         }
-        else if(base == "hex"){
-            cout << asDec(num, base) << " dec" << endl;
-            cout << asBin(num, base) << " bin";
+        else if(!strcmp(b, "hex")){
+            //printf("%d dec\n", a);
+            //cout << dectobin(a) << " bin" << endl;
         }
-        cout << endl << endl;
-        x++;
+        cout << endl;
     }
     return 0;
 }
