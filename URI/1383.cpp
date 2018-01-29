@@ -49,8 +49,6 @@ int main() {
             }
 
         memset(vet, 0, sizeof(vet));
-        
-        
 
         for (int j = 3; j < 6 && !flag; j++)
             for (int k = 0; k < 3 && !flag; k++) {
@@ -61,8 +59,6 @@ int main() {
             }
         
         memset(vet, 0, sizeof(vet));
-        
-        
 
         for (int j = 3; j < 6 && !flag; j++)
             for (int k = 3; k < 6 && !flag; k++) {
@@ -73,7 +69,6 @@ int main() {
             }
             
         memset(vet, 0, sizeof(vet));
-        
 
         for (int j = 3; j < 6 && !flag; j++)
             for (int k = 6; k < 9 && !flag; k++) {
@@ -84,7 +79,6 @@ int main() {
             }
             
         memset(vet, 0, sizeof(vet));
-        
 
         for (int j = 6; j < 9 && !flag; j++)
             for (int k = 0; k < 3 && !flag; k++) {
