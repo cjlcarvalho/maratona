@@ -2,13 +2,6 @@
 
 using namespace std;
 
-queue<char> toQueue(string s){
-    queue<char> q;
-    for(char c : s)
-        q.push(c);
-    return q;
-}
-
 int main(){
     int n, m;
     string a, b;
@@ -20,11 +13,11 @@ int main(){
         cin.ignore();
         while(m--){
             getline(cin, b);
-            queue<char> q = toQueue(b);
-            for(unsigned int i = 0; i<a.size(); i++)
-                if(a[i] == q.front())
-                    q.pop();
-            if(q.empty())
+            unsigned int j = 0;
+            for(unsigned int i = 0; i < a.size() && j < b.size(); i++)
+                if(a[i] == b[j])
+                    j++;
+            if(j == b.size())
                 cout << "Yes" << endl;
             else cout << "No" << endl;
         }
