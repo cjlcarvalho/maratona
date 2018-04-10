@@ -2,27 +2,62 @@
 
 using namespace std;
 
-int solve(int v[], int t[], int i, int cont, int n, int h){
-    if(i > n)
-        return 0;
-    else if(t[i] + cont > h)
-        return 0;
-    else if(t[i] + cont < h){ 
-        return min(v[i] + solve(v, t, i + 1, t[i] + cont, n, h), solve(v, t, i + 1, cont, n, h));  
+struct Tarefa 
+{
+    double v, t;
+
+    double tph() const
+    {
+        return v / t;
     }
-    else if(t[i] + cont == h)
-        return v[i];
-    return 0;
+};
+
+bool compare(const Tarefa &t1, const Tarefa &t2)
+{
+    if (t1.tph() > t2.tph())
+        return true;
+    else if (t1.tph() == t2.tph() && t1.v > t2.v)
+        return true;
+    else if (t1.tph() == t2.tph() && t1.v == t2.v && t1.t > t2.t)
+        return true;
+    return false;
 }
 
-int main(){
+int main()
+{
     int n, h;
-    while(cin >> n >> h){
-        int v[n], t[n];
-        for(int i = 0; i<n; i++)
-            cin >> v[i] >> t[i];
-        int min = solve(v, t, 0, 0, n, h);
-        cout << min << endl;
+    double a, b;
+
+    while (cin >> n >> h) {
+        vector<Tarefa> v;
+
+        for (int i = 0; i < n; i++) {
+            cin >> a >> b;
+            v.push_back({a, b});
+        }
+
+        sort(v.begin(), v.end(), compare);
+
+        cout << endl;
+        for (Tarefa i : v)
+            cout << i.v << " " << i.t << endl;
+
+        unsigned int i = 0;
+        int cont = 0, val = 0;
+
+        while ((v[i].t + cont) <= h) {
+            cout << v[i].t << " " << cont << endl;
+            cont += v[i].t;
+            val += v[i++].v;
+        }
+        cout << cont << endl;
+        cout << val << endl;
+
+        while (i < v.size())
+            val -= v[i++].v;
+
+        cout << (val >= 0 ? 0 : abs(val)) << endl;
     }
+
     return 0;
 }
