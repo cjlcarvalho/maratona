@@ -2,32 +2,36 @@
 
 using namespace std;
 
-int altura[231];
+int vet[231];
 
-void limpar(){
-    memset(altura, 0, sizeof(altura));
+bool next(int i)
+{
+    for (int j = i; j < 231; j++)
+        if (vet[j] > 0)
+            return true;
+    return false;
 }
 
-int main(){
-    int n, m, a, max;
-    scanf(" %d", &n);
-    while(n--){
-        scanf(" %d", &m);
-        limpar();
-        max = -1;
-        for(int i = 0; i<m; i++) {
-            scanf(" %d", &a);
-            if(max < a)
-                max = a; 
-            altura[a]++;
+int main()
+{
+    long n, p, a;
+    scanf("%ld", &n);
+    
+    while (n--) {
+        scanf("%ld", &p);
+        
+        while(p--) {
+            scanf("%ld", &a);
+            vet[a]++;
         }
-        for(int i = 20; i<=max; i++){
-            for(int j = 0; j < altura[i]; j++){
-                printf("%d", i);
-                if(!(j == altura[i] - 1 && i == max)) printf(" ");
+        
+        for (int i = 20; i < 231; i++) {
+            while (vet[i] > 0) {
+                vet[i]--;
+                printf("%d%s", i, (next(i) ? " " : "\n"));
             }
         }
-        printf("\n");
     }
+    
     return 0;
 }
