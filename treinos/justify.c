@@ -13,8 +13,7 @@ int main()
 
 	if (n < strlen(frase)) return 1;
 
-	int sizeF = 0;
-	int palavras = 0;
+	int sizeF = 0, palavras = 0;
 
 	for (int i = 0; frase[i]; i++)
 		if (frase[i] != ' ') sizeF++;
@@ -22,11 +21,7 @@ int main()
 
 	if (frase[strlen(frase) - 1] != ' ') palavras++;
 
-	int espacos = n - sizeF;
-
-	int i = 0;
-
-	int cont = 0;
+	int espacos = n - sizeF, e = palavras - 1, i = 0, cont = 0;
 
 	while (frase[i])
 	{
@@ -36,13 +31,13 @@ int main()
 
 		int m = espacos / (palavras - 1);
 		while (m--)
-		{	
-			printf(" ");
-			cont++;
-		}
+			printf(".");
 
-		if (espacos % (palavras - 1) && (cont - espacos) > (espacos / palavras - 1))
-			printf(" ");
+        e--;
+
+		if ((espacos % (palavras - 1)) && e == 0)
+            for (int x = 0; x < (espacos % (palavras - 1)); x++)
+			    printf("+");
 
 		i++;
 	}
