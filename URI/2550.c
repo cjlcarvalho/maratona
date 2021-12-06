@@ -11,6 +11,11 @@ typedef struct
 
 int p[1000];
 
+void make_set(int n) {
+    for (int i = 0; i < n; i++)
+        p[i] = i;
+}
+
 int find(int n) {
     if (n == p[n])
         return n;
@@ -45,8 +50,7 @@ int main()
             edges[i].w = w;
         }
 
-        for (i = 0; i < n; i++)
-            p[i] = i;
+        make_set(n);
 
         sum = 0;
         components = n;
