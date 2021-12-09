@@ -28,9 +28,7 @@ int dijkstra(Graph& graph) {
     for (Node* node : graph)
         Q.push(node);
 
-    bool arrived = false;
-
-    while(!Q.empty() && !arrived) {
+    while(!Q.empty()) {
         Node* u = Q.top();
         Q.pop();
 
@@ -43,10 +41,7 @@ int dijkstra(Graph& graph) {
             if (v->dist > dist) {
                 v->dist = dist;
                 v->pred = u;
-                if (v == graph.back()) {
-                    arrived = true;
-                    break;
-                }
+                Q.push(v);
             }
         }
     }
