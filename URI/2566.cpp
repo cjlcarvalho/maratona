@@ -4,7 +4,6 @@ using namespace std;
 
 struct Node {
     int dist = INT_MAX;
-    Node* pred = nullptr;
     map<int, int> adj;
 
     void add_adj(int a, int r) {
@@ -40,7 +39,6 @@ int dijkstra(Graph& graph) {
                 dist = INT_MAX;
             if (v->dist > dist) {
                 v->dist = dist;
-                v->pred = u;
                 Q.push(v);
             }
         }
