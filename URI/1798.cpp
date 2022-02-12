@@ -2,61 +2,32 @@
 
 using namespace std;
 
-typedef vector<int> vi;
-typedef vector< vector<int> > vii;
+const int MAX = 2000;
+int v[MAX];
+int c[MAX];
+int dp[MAX + 1][MAX + 1];
 
-struct PipeCut
-{
-    int m_n;
-    int m_max;
-    vi values;
-    vi cutSizes;
-    vii table;
+int solve(int i, int m, int n) {
+    if (i == n)
+        return 0;
+    if (m == 0)
+        return 0;
+    if (m < 0)
+        return -2000;
+    if (dp[i][m] == -1)
+        dp[i][m] = max(solve(i + 1, m, n), v[i] + solve(i, m - c[i], n));
+    return dp[i][m];
+}
 
-    PipeCut(int n, int m) : m_n(n), m_max(m) {
-        values = vi(n);
-        cutSizes = vi(n);
-        table = vii(n + 1);
-        initialize_table();
-    }
+int main() {
+    int n, m;
 
-    void initialize_table() {
-        for (int i = 0; i < m_n; i++) {
-            table[i] = vi(m_max + 1);
-            for (int j = 0; j < m_max + 1; j++)
-                table[i][j] = -1;
-        }
-    }
-
-    int cutPipes(int size) {
-        return _cut(0, size);
-    }
-
-    int _cut(int idx, int size) {
-        if (idx == m_n || size == 0)
-            return 0;
-        else if (size < 0)
-            return -m_max;
-        else if (table[idx][size] == -1) {
-            int incIdx = _cut(idx + 1, size);
-            int decSize = _cut(idx, size - cutSizes[idx]);
-            table[idx][size] = max(incIdx, values[idx] + decSize);
-        }
-        return table[idx][size];
-    }
-};
-
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    int n, m, c, v;
-    while (cin >> n >> m) {
-        PipeCut pc(n, m);
+    memset(dp, -1, sizeof(dp));
+    while (scanf(" %d %d", &n, &m) != EOF) {
         for (int i = 0; i < n; i++)
-            cin >> pc.cutSizes[i] >> pc.values[i];
-        cout << pc.cutPipes(m) << endl;
+            scanf(" %d %d", &c[i], &v[i]);
+        printf("%d\n", solve(0, m, n));
     }
+
     return 0;
 }
